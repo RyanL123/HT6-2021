@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import {
     chakra,
     Avatar,
@@ -12,37 +12,38 @@ import {
     VStack,
     IconButton,
     CloseButton,
-} from "@chakra-ui/react"
-import { AiOutlineMenu } from "react-icons/ai"
-import firebase from "../firebase"
+} from "@chakra-ui/react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { AiOutlineMenu } from "react-icons/ai";
+import firebase from "../firebase";
 
 const Nav = () => {
-    const bg = useColorModeValue("white", "gray.800")
-    const mobileNav = useDisclosure()
+    const bg = useColorModeValue("white", "gray.800");
+    const mobileNav = useDisclosure();
     function signIn() {
-        var provider = new firebase.auth.GoogleAuthProvider()
+        var provider = new firebase.auth.GoogleAuthProvider();
         firebase
             .auth()
             .signInWithPopup(provider)
-            .then(result => {
+            .then((result) => {
                 /** @type {firebase.auth.OAuthCredential} */
-                var credential = result.credential
+                var credential = result.credential;
                 // This gives you a Google Access Token. You can use it to access the Google API.
-                var token = credential.accessToken
+                var token = credential.accessToken;
                 // The signed-in user info.
-                var user = result.user
-                localStorage.setItem("user", JSON.stringify(user))
+                var user = result.user;
+                localStorage.setItem("user", JSON.stringify(user));
             })
-            .catch(error => {
+            .catch((error) => {
                 // Handle Errors here.
-                var errorCode = error.code
-                var errorMessage = error.message
+                var errorCode = error.code;
+                var errorMessage = error.message;
                 // The email of the user's account used.
-                var email = error.email
+                var email = error.email;
                 // The firebase.auth.AuthCredential type that was used.
-                var credential = error.credential
+                var credential = error.credential;
                 // ...
-            })
+            });
     }
     return (
         <React.Fragment>
@@ -78,26 +79,31 @@ const Nav = () => {
                             color="brand.500"
                             display={{ base: "none", md: "inline-flex" }}
                         >
-                            <Button variant="ghost">Features</Button>
-                            <Button variant="ghost">Pricing</Button>
-                            <Button variant="ghost">Blog</Button>
-                            <Button variant="ghost">Company</Button>
-                            {localStorage.getItem("user") ? (
-                                <Avatar
-                                    name=""
-                                    src={
-                                        JSON.parse(localStorage.getItem("user"))
-                                            .photoURL
-                                    }
-                                />
-                            ) : (
-                                <Button
-                                    variant="ghost"
-                                    onClick={() => signIn()}
-                                >
-                                    Sign in
-                                </Button>
-                            )}
+                            <Router>
+                                <Button variant="ghost">Features</Button>
+                                <Button variant="ghost">Pricing</Button>
+                                <Button variant="ghost">Blog</Button>
+                                <Button variant="ghost">Company</Button>
+                                {localStorage.getItem("user") ? (
+                                    <Link to="/dashboard">
+                                        <Avatar
+                                            name=""
+                                            src={
+                                                JSON.parse(
+                                                    localStorage.getItem("user")
+                                                ).photoURL
+                                            }
+                                        />
+                                    </Link>
+                                ) : (
+                                    <Button
+                                        variant="ghost"
+                                        onClick={() => signIn()}
+                                    >
+                                        Sign in
+                                    </Button>
+                                )}
+                            </Router>
                         </HStack>
                         <Box display={{ base: "inline-flex", md: "none" }}>
                             <IconButton
@@ -151,7 +157,7 @@ const Nav = () => {
                 </Flex>
             </chakra.header>
         </React.Fragment>
-    )
-}
+    );
+};
 
-export default Nav
+export default Nav;
