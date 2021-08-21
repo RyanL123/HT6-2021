@@ -69,7 +69,7 @@ const Nav = () => {
                             <VisuallyHidden>Choc</VisuallyHidden>
                         </chakra.a>
                         <chakra.h1 fontSize="xl" fontWeight="medium" ml="2">
-                            Choc
+                            Name
                         </chakra.h1>
                     </Flex>
                     <HStack display="flex" alignItems="center" spacing={1}>
@@ -79,31 +79,31 @@ const Nav = () => {
                             color="brand.500"
                             display={{ base: "none", md: "inline-flex" }}
                         >
-                            <Router>
+                            <Link to="/">
                                 <Button variant="ghost">Features</Button>
-                                <Button variant="ghost">Pricing</Button>
-                                <Button variant="ghost">Blog</Button>
-                                <Button variant="ghost">Company</Button>
-                                {localStorage.getItem("user") ? (
-                                    <Link to="/dashboard">
-                                        <Avatar
-                                            name=""
-                                            src={
-                                                JSON.parse(
-                                                    localStorage.getItem("user")
-                                                ).photoURL
-                                            }
-                                        />
-                                    </Link>
-                                ) : (
-                                    <Button
-                                        variant="ghost"
-                                        onClick={() => signIn()}
-                                    >
-                                        Sign in
-                                    </Button>
-                                )}
-                            </Router>
+                            </Link>
+                            <Button variant="ghost">Pricing</Button>
+                            <Button variant="ghost">Blog</Button>
+                            <Button variant="ghost">Company</Button>
+                            {localStorage.getItem("user") ? (
+                                <Link to="/dashboard">
+                                    <Avatar
+                                        name=""
+                                        src={
+                                            JSON.parse(
+                                                localStorage.getItem("user")
+                                            ).photoURL
+                                        }
+                                    />
+                                </Link>
+                            ) : (
+                                <Button
+                                    variant="ghost"
+                                    onClick={() => signIn()}
+                                >
+                                    Sign in
+                                </Button>
+                            )}
                         </HStack>
                         <Box display={{ base: "inline-flex", md: "none" }}>
                             <IconButton
