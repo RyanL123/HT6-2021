@@ -17,8 +17,8 @@ const App = () => {
                 <Nav />
                 <Switch>
                     <Route exact path="/">
-                      <Hero />
-                      <Features />
+                        <Hero />
+                        <Features />
                     </Route>
                     <Route path="/dashboard">
                         {localStorage.getItem("user") ? (
