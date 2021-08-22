@@ -32,8 +32,8 @@ const Nav = () => {
                 var user = result.user;
                 console.log(user);
                 localStorage.setItem("user", JSON.stringify(user));
-                // // Redirect to dashboard
-                window.location.href = "/dashboard";
+                // reload to show navbar change
+                window.location.reload();
             })
             .catch((error) => {
                 alert(error.message);
