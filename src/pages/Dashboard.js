@@ -11,6 +11,7 @@ import {
     InputRightAddon,
     InputGroup,
     Select,
+    useToast,
 } from "@chakra-ui/react";
 import firebase from "../firebase";
 
@@ -19,11 +20,15 @@ var user = JSON.parse(localStorage.getItem("user"));
 
 const Dashboard = () => {
     const [ingredients, setIngredients] = useState([]);
+    const [newIngredient, setNewIngredient] = useState("");
+    const [newUnit, setNewUnit] = useState("");
+    const toast = useToast();
     const ref = firebase.firestore().collection("users").doc(user.uid);
     const handleChange = (e) => {
         const name = e.target.name;
         const amount = e.target.value == "" ? 0 : e.target.value;
 
+        // find the ingredient that changed
         const updatedIngredients = ingredients.map((ingredient) =>
             ingredient.name === name
                 ? { ...ingredient, amount: parseInt(amount) }
@@ -33,13 +38,57 @@ const Dashboard = () => {
         setIngredients(updatedIngredients);
         ref.update({ ingredients: updatedIngredients });
     };
+    // add new ingredient created by user to dashboard and firebase
+    function addIngredient() {
+        const ingredient = {
+            name: newIngredient.toLowerCase(),
+            amount: 0,
+            unit: newUnit,
+        };
+        // make sure ingredient has name and unit
+        if (newIngredient === "") {
+            toast({
+                title: "Invalid name",
+                description: "Your ingredient must have a name!",
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+            });
+        } else if (newUnit === "") {
+            toast({
+                title: "Invalid unit",
+                description: "Your ingredient must have a unit!",
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+            });
+        } else {
+            toast({
+                title: "Ingredient Added!",
+                description: `Ingredient ${newIngredient} has been added!`,
+                status: "success",
+                duration: 5000,
+                isClosable: true,
+            });
+            setNewIngredient("");
+            setNewUnit("");
+            var updatedIngredients = ingredients;
+            updatedIngredients.push(ingredient);
+            setIngredients(updatedIngredients);
+            ref.update({ ingredients: updatedIngredients });
+        }
+    }
     // get data from firebase and store into state
     useEffect(() => {
         ref.get().then(function (doc) {
             if (doc.exists) {
                 setIngredients(doc.data().ingredients);
             } else {
-                firebase.firestore().collection("users").doc(user.uid).set({});
+                firebase
+                    .firestore()
+                    .collection("users")
+                    .doc(user.uid)
+                    .set({ ingredients: [] });
             }
         });
     }, []);
@@ -85,8 +134,17 @@ const Dashboard = () => {
                     justifyContent="space-evenly"
                 >
                     <FormLabel>Add Ingredient</FormLabel>
-                    <Input placeholder="e.g tomato" />
-                    <Select placeholder="Select Unit">
+                    <Input
+                        placeholder="e.g tomato"
+                        value={newIngredient}
+                        onChange={(e) => setNewIngredient(e.target.value)}
+                    />
+                    <Select
+                        placeholder="Select Unit"
+                        value={newUnit}
+                        onChange={(e) => setNewUnit(e.target.value)}
+                    >
+                        <option value="ea">ea</option>
                         <option value="mL">mL</option>
                         <option value="L">L</option>
                         <option value="lbs">lbs</option>
@@ -97,7 +155,9 @@ const Dashboard = () => {
                         <option value="g">g</option>
                         <option value="Tbsp">Tbsp</option>
                     </Select>
-                    <Button colorScheme="green">Add</Button>
+                    <Button colorScheme="green" onClick={() => addIngredient()}>
+                        Add
+                    </Button>
                 </Box>
             </Grid>
             <Grid templateColumns="repeat(4, 1fr)" gap={6} my="50px">
