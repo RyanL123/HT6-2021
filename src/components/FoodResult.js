@@ -37,20 +37,22 @@ const FoodResult = (props) => {
     const [recipeIngredients, setRecipeIngredients] = useState([]);
     const ref = firebase.firestore();
     useEffect(() => {
-        ref.collection("users")
-            .doc(user.uid)
-            .get()
-            .then(function (doc) {
-                if (doc.exists) {
-                    setIngredients(doc.data().ingredients);
-                } else {
-                    firebase
-                        .firestore()
-                        .collection("users")
-                        .doc(user.uid)
-                        .set({ ingredients: [] });
-                }
-            });
+        if (user) {
+            ref.collection("users")
+                .doc(user.uid)
+                .get()
+                .then(function (doc) {
+                    if (doc.exists) {
+                        setIngredients(doc.data().ingredients);
+                    } else {
+                        firebase
+                            .firestore()
+                            .collection("users")
+                            .doc(user.uid)
+                            .set({ ingredients: [] });
+                    }
+                });
+        }
         ref.collection("recipes")
             .doc(props.id)
             .get()

@@ -14,7 +14,7 @@ const tomatoAndEggs = {
 };
 
 const tomatoOmelet = {
-    title: "Tomato Omelet",
+    title: "Tomato Omelette",
     image: "https://hurrythefoodup.com/wp-content/uploads/2017/03/Tomato-Omelette-7.jpg",
     link: "/recipe/PvEaBZvu4GC7ZjAcIs3I",
     description:
