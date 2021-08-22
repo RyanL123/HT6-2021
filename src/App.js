@@ -1,8 +1,9 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Nav from "./components/Nav";
 import Dashboard from "./pages/Dashboard";
 import Recipe from "./pages/Recipe";
+import Search from "./pages/Search";
 
 
 const App = () => {
@@ -17,6 +18,9 @@ const App = () => {
                     </Route>
                     <Route path="/recipe">
                         <Recipe />
+                    </Route>
+                    <Route path="/search">
+                        <Search />
                     </Route>
                 </Switch>
             </Router>
