@@ -20,13 +20,8 @@ import {
 
 import { Link } from "react-router-dom";
 
-<<<<<<< HEAD
-const Recipe = (props) =>{
-    const [ servings, setServings ] = useState(1)
-=======
 const Recipe = () => {
     const [servings, setServings] = useState(1);
->>>>>>> 89df802231000401d81d93f8069dff6525a44b43
 
     return (
         <Center w="100%">
@@ -40,13 +35,8 @@ const Recipe = () => {
                     <Heading textAlign={["center", null, "left"]}>
                         Food Name
                     </Heading>
-<<<<<<< HEAD
                     <Image 
                         src={props.image}
-=======
-                    <Image
-                        src="https://thewoksoflife.com/wp-content/uploads/2016/02/beef-noodle-soup-7-1.jpg"
->>>>>>> 89df802231000401d81d93f8069dff6525a44b43
                         fallbackSrc="https://via.placeholder.com/150"
                         boxSize="50vh"
                         borderRadius="5%"
@@ -127,15 +117,8 @@ const Recipe = () => {
                         </Checkbox>
                         <Text fontSize="lg">Instructions for step 4</Text>
                     </Stack>
-<<<<<<< HEAD
-                    <Button mt="2rem" onClick={console.log("clicked")}>
-                        <Link to="/dashboard">
-                            I made this recipe!
-                        </Link>
-=======
                     <Button mt="2rem">
                         <Link to="/dashboard">I made this recipe!</Link>
->>>>>>> 89df802231000401d81d93f8069dff6525a44b43
                     </Button>
                 </Box>
             </Flex>
