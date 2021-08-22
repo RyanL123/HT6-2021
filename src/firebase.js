@@ -12,14 +12,4 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
-firebase
-    .auth()
-    .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-    .then(() => {})
-    .catch((error) => {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-    });
-
 export default firebase;

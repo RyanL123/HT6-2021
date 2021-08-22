@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
     chakra,
     Avatar,
@@ -14,7 +14,7 @@ import {
     IconButton,
     CloseButton,
 } from "@chakra-ui/react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
 import logo from "../assets/logo.png";
 import firebase from "../firebase";
@@ -23,16 +23,33 @@ const Nav = () => {
     const bg = useColorModeValue("white", "gray.800");
     const mobileNav = useDisclosure();
     function signIn() {
-        var provider = new firebase.auth.GoogleAuthProvider();
+        const provider = new firebase.auth.GoogleAuthProvider();
         firebase
             .auth()
-            .signInWithPopup(provider)
+            .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+            .then(() => {
+                firebase.auth().signInWithRedirect(provider);
+            });
+    }
+    useEffect(() => {
+        firebase
+            .auth()
+            .getRedirectResult()
             .then((result) => {
                 // The signed-in user info.
                 var user = result.user;
-                localStorage.setItem("user", JSON.stringify(user));
-                // Redirect to dashboard
-                window.location.href = "/dashboard";
+                // only overwrite if there is no current user signed in
+                // for some reason sometimes the value is the word "null"
+                if (
+                    localStorage.getItem("user") == null ||
+                    localStorage.getItem("user") == "null"
+                ) {
+                    localStorage.setItem("user", JSON.stringify(user));
+                    if (user) {
+                        // Redirect to dashboard
+                        window.location.href = "/dashboard";
+                    }
+                }
             })
             .catch((error) => {
                 // Handle Errors here.
@@ -43,8 +60,35 @@ const Nav = () => {
                 // The firebase.auth.AuthCredential type that was used.
                 var credential = error.credential;
                 // ...
+                console.log(error.code);
+                console.log(error.message);
+                console.log(error.credential);
             });
-    }
+    });
+    // firebase
+    //     .auth()
+    //     .signInWithPopup(provider)
+    //     .then((result) => {
+    //         // The signed-in user info.
+    //         var user = result.user;
+    //         console.log(user);
+    //         localStorage.setItem("user", JSON.stringify(user));
+    //         // // Redirect to dashboard
+    //         // window.location.href = "/dashboard";
+    //     })
+    //     .catch((error) => {
+    //         // Handle Errors here.
+    //         var errorCode = error.code;
+    //         var errorMessage = error.message;
+    //         // The email of the user's account used.
+    //         var email = error.email;
+    //         // The firebase.auth.AuthCredential type that was used.
+    //         var credential = error.credential;
+    //         // ...
+    //         console.log(error.code);
+    //         console.log(error.message);
+    //         console.log(error.credential);
+    //     });
     return (
         <React.Fragment>
             <chakra.header
@@ -87,7 +131,7 @@ const Nav = () => {
                                 <Button variant="ghost">Search</Button>
                             </Link>
 
-                            {localStorage.getItem("user") ? (
+                            {JSON.parse(localStorage.getItem("user")) ? (
                                 <Link to="/dashboard">
                                     <Avatar
                                         name=""
@@ -101,7 +145,9 @@ const Nav = () => {
                             ) : (
                                 <Button
                                     variant="ghost"
-                                    onClick={() => signIn()}
+                                    onClick={() => {
+                                        signIn();
+                                    }}
                                 >
                                     Sign in
                                 </Button>
