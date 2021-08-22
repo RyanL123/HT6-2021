@@ -70,7 +70,7 @@ const Nav = () => {
                         </chakra.a>
                         <Image width="30px" height="30px" src={logo}></Image>
                         <chakra.h1 fontSize="xl" fontWeight="medium" ml="2">
-                            FoodAdd
+                            FoodAddict
                         </chakra.h1>
                     </Flex>
                     <HStack display="flex" alignItems="center" spacing={1}>
@@ -83,8 +83,12 @@ const Nav = () => {
                             <Link to="/">
                                 <Button variant="ghost">Features</Button>
                             </Link>
-                            <Button variant="ghost"><Link to="/search">Search</Link></Button>
-                            <Button variant="ghost"><Link to="/recipe">Recipe</Link></Button>
+                            <Button variant="ghost">
+                                <Link to="/search">Search</Link>
+                            </Button>
+                            <Button variant="ghost">
+                                <Link to="/recipe">Recipe</Link>
+                            </Button>
 
                             {localStorage.getItem("user") ? (
                                 <Link to="/dashboard">
