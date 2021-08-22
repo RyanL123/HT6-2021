@@ -21,6 +21,7 @@ const FoodResult = (props) => {
             >
                 <Box w={{ lg: "50%" }}>
                     <Box
+                        objectPosition="center center"
                         h={{ base: 64, lg: "full" }}
                         rounded={{ lg: "lg" }}
                         bgSize="cover"

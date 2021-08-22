@@ -29,7 +29,7 @@ const App = () => {
                             <Redirect to="/" />
                         )}
                     </Route>
-                    <Route path="/recipe">
+                    <Route path="/recipe/:id">
                         <Recipe />
                     </Route>
                     <Route path="/search">

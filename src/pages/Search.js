@@ -6,15 +6,15 @@ import FoodResult from "../components/FoodResult";
 const tomatoAndEggs = {
     title: "Tomato and Eggs",
     image: "https://christieathome.com/wp-content/uploads/2020/10/Chinese-Tomato-Egg-Stirfry-18-1-scaled.jpg",
-    link: "/recipe",
+    link: "/recipe/5JglkB1rEZcuVbtxTbk5",
     description:
         "Chinese Tomato Egg Stir-Fry. A popular Chinese dish that is deliciously sweet, tangy, and savoury. It's a great side dish for supper or lunch and is very easy to make at home!.",
 };
 
 const tomatoOmelet = {
-    title: "Tomato Omellete",
+    title: "Tomato Omelet",
     image: "https://hurrythefoodup.com/wp-content/uploads/2017/03/Tomato-Omelette-7.jpg",
-    link: "/recipe",
+    link: "/recipe/PvEaBZvu4GC7ZjAcIs3I",
     description:
         "Preparing an omelette shows the chef many things, including your plating abilities (how you present a dish) and how well you can cook a delicate ingredient (the egg). We’ve opted for this tomato omelette version for a little more kick.",
 };
@@ -22,7 +22,7 @@ const tomatoOmelet = {
 const spaghettiMarinara = {
     title: "Spaghetti Marinara with Eggs",
     image: "https://pinchofyum.com/wp-content/uploads/2014/05/spaghetti-6.jpg",
-    link: "/recipe",
+    link: "/recipe/cxdmqR5bEOlDx0tuj11a",
     description:
         "Poached eggs on spaghetti with homemade tomato sauce issss basically the best thing ever. And I’ve been eating it all week. Just try to stop that dinner train, I dare you. Either move outta the way or jump on this one because here it comes.",
 };

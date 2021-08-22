@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     chakra,
     Box,
@@ -17,12 +17,23 @@ import {
     NumberIncrementStepper,
     NumberDecrementStepper,
 } from "@chakra-ui/react";
-
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import firebase from "../firebase";
 
 const Recipe = () => {
     const [servings, setServings] = useState(1);
-
+    const [data, setData] = useState({});
+    const { id } = useParams();
+    const ref = firebase.firestore().collection("recipes").doc(id);
+    useEffect(() => {
+        ref.get().then(function (doc) {
+            if (doc.exists) {
+                setData(doc.data().data);
+                console.log(doc.data().data);
+            } else {
+            }
+        });
+    }, []);
     return (
         <Center w="100%">
             <Flex
@@ -33,14 +44,15 @@ const Recipe = () => {
             >
                 <Flex direction="column">
                     <Heading textAlign={["center", null, "left"]}>
-                        Food Name
+                        {data.name}
                     </Heading>
-                    <Image 
-                        src="https://christieathome.com/wp-content/uploads/2020/10/Chinese-Tomato-Egg-Stirfry-18-1-scaled.jpg"
+                    <Image
+                        src={data.image}
                         fallbackSrc="https://via.placeholder.com/150"
                         boxSize="50vh"
                         borderRadius="5%"
                         alignSelf="center"
+                        objectFit="cover"
                     />
                     <Box mt="2rem">
                         <Text fontSize="2xl">Ingredients</Text>
@@ -62,34 +74,18 @@ const Recipe = () => {
                         </Flex>
 
                         <Stack spacing={4} direction="column">
-                            <Checkbox
-                                colorScheme="green"
-                                size="lg"
-                                defaultIsChecked
-                            >
-                                Item 1
-                            </Checkbox>
-                            <Checkbox
-                                colorScheme="green"
-                                size="lg"
-                                defaultIsChecked
-                            >
-                                Item 2
-                            </Checkbox>
-                            <Checkbox
-                                colorScheme="green"
-                                size="lg"
-                                defaultIsChecked
-                            >
-                                Item 3
-                            </Checkbox>
-                            <Checkbox
-                                colorScheme="green"
-                                size="lg"
-                                defaultIsChecked
-                            >
-                                Item 4
-                            </Checkbox>
+                            {data.ingredients
+                                ? data.ingredients.map((ingredient) => (
+                                      <Checkbox
+                                          colorScheme="green"
+                                          size="lg"
+                                          defaultIsChecked
+                                      >
+                                          {ingredient.amount * servings}{" "}
+                                          {ingredient.unit} {ingredient.name}
+                                      </Checkbox>
+                                  ))
+                                : null}
                         </Stack>
                     </Box>
                 </Flex>
@@ -100,22 +96,16 @@ const Recipe = () => {
                         direction="column"
                         divider={<StackDivider borderColor="gray.200" />}
                     >
-                        <Checkbox colorScheme="green" size="lg">
-                            Step 1
-                        </Checkbox>
-                        <Text fontSize="lg">Instructions for step 1</Text>
-                        <Checkbox colorScheme="green" size="lg">
-                            Step 2
-                        </Checkbox>
-                        <Text fontSize="lg">Instructions for step 2</Text>
-                        <Checkbox colorScheme="green" size="lg">
-                            Step 3
-                        </Checkbox>
-                        <Text fontSize="lg">Instructions for step 3</Text>
-                        <Checkbox colorScheme="green" size="lg">
-                            Step 4
-                        </Checkbox>
-                        <Text fontSize="lg">Instructions for step 4</Text>
+                        {data.steps
+                            ? data.steps.map((step, index) => (
+                                  <Box>
+                                      <Checkbox colorScheme="green" size="lg">
+                                          Step {index + 1}
+                                      </Checkbox>
+                                      <Text fontSize="lg">{step}</Text>
+                                  </Box>
+                              ))
+                            : null}
                     </Stack>
                     <Button mt="2rem">
                         <Link to="/dashboard">I made this recipe!</Link>
