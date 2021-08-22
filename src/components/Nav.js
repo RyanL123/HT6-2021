@@ -26,13 +26,11 @@ const Nav = () => {
             .auth()
             .signInWithPopup(provider)
             .then((result) => {
-                /** @type {firebase.auth.OAuthCredential} */
-                var credential = result.credential;
-                // This gives you a Google Access Token. You can use it to access the Google API.
-                var token = credential.accessToken;
                 // The signed-in user info.
                 var user = result.user;
                 localStorage.setItem("user", JSON.stringify(user));
+                // Redirect to dashboard
+                window.location.href = "/dashboard";
             })
             .catch((error) => {
                 // Handle Errors here.
