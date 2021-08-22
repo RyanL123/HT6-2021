@@ -61,9 +61,10 @@ const Recipe = () => {
                                 Servings
                             </Text>
                             <NumberInput
-                                defaultValue={servings}
                                 min={0}
                                 w="20%"
+                                value={servings}
+                                onChange={(value) => setServings(value)}
                             >
                                 <NumberInputField />
                                 <NumberInputStepper>
