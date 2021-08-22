@@ -2,6 +2,7 @@ import React from "react";
 import {
     chakra,
     Avatar,
+    Image,
     Box,
     Flex,
     useColorModeValue,
@@ -15,6 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
+import logo from "../assets/logo.png";
 import firebase from "../firebase";
 
 const Nav = () => {
@@ -57,7 +59,7 @@ const Nav = () => {
                     justifyContent="space-between"
                     mx="auto"
                 >
-                    <Flex>
+                    <Flex alignItems="center">
                         <chakra.a
                             href="/"
                             title="Choc Home Page"
@@ -66,8 +68,9 @@ const Nav = () => {
                         >
                             <VisuallyHidden>Choc</VisuallyHidden>
                         </chakra.a>
+                        <Image width="30px" height="30px" src={logo}></Image>
                         <chakra.h1 fontSize="xl" fontWeight="medium" ml="2">
-                            Name
+                            FoodAdd
                         </chakra.h1>
                     </Flex>
                     <HStack display="flex" alignItems="center" spacing={1}>

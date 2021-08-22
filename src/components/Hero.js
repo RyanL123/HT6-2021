@@ -1,17 +1,24 @@
-import { Heading, Flex, Text } from "@chakra-ui/react";
+import { Heading, Flex, Text, Image, Box } from "@chakra-ui/react";
 import React from "react";
 import LazyHero from "react-lazy-hero";
+import logo from "../assets/logo.png";
+import dottech from "../assets/dottech.png";
 
 const Hero = (props) => {
     return (
         <div>
             <LazyHero
-                imageSrc="https://t3.ftcdn.net/jpg/02/54/20/88/360_F_254208823_NXcV5RCcWJ1vgSuWjhPqIpPmqXIyBrDO.jpg"
+                imageSrc="https://cdn.discordapp.com/attachments/772518562576728084/878822825115385916/HD-Food-Backgrounds.png"
                 minHeight="75vh"
+                opacity={0.4}
             >
-                <Heading size="4xl" color="#000000">
-                    FoodAdd
-                </Heading>
+                <Box display="flex" flexDirection="row" alignItems="center">
+                    <Image src={logo} width="100px" height="100px"></Image>
+                    <Heading size="4xl" color="#262626" ml="20px">
+                        FoodAdd
+                    </Heading>
+                    <Image src={dottech} height="54px"></Image>
+                </Box>
             </LazyHero>
 
             <Flex
