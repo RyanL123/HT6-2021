@@ -80,6 +80,9 @@ const Nav = () => {
                             <Link to="/">
                                 <Button variant="ghost">Features</Button>
                             </Link>
+                            <Button variant="ghost"><Link to="/search">Search</Link></Button>
+                            <Button variant="ghost"><Link to="/recipe">Recipe</Link></Button>
+
                             {localStorage.getItem("user") ? (
                                 <Link to="/dashboard">
                                     <Avatar
