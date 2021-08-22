@@ -9,6 +9,8 @@ import Nav from "./components/Nav";
 import Dashboard from "./pages/Dashboard";
 import Hero from "./components/Hero";
 import Features from "./components/Features";
+import Recipe from "./pages/Recipe";
+import Search from "./pages/Search";
 
 const App = () => {
     return (
@@ -26,6 +28,12 @@ const App = () => {
                         ) : (
                             <Redirect to="/" />
                         )}
+                    </Route>
+                    <Route path="/recipe">
+                        <Recipe />
+                    </Route>
+                    <Route path="/search">
+                        <Search />
                     </Route>
                 </Switch>
             </Router>
