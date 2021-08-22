@@ -7,6 +7,8 @@ import {
 } from "react-router-dom";
 import Nav from "./components/Nav";
 import Dashboard from "./pages/Dashboard";
+import Hero from "./components/Hero";
+import Features from "./components/Features";
 
 const App = () => {
     return (
@@ -14,7 +16,10 @@ const App = () => {
             <Router>
                 <Nav />
                 <Switch>
-                    <Route exact path="/"></Route>
+                    <Route exact path="/">
+                      <Hero />
+                      <Features />
+                    </Route>
                     <Route path="/dashboard">
                         {localStorage.getItem("user") ? (
                             <Dashboard />
