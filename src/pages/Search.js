@@ -35,8 +35,8 @@ const Search = () => {
     return (
         <Flex direction="column">
             <FoodResult {...tomatoOmelet}></FoodResult>
-            {/* <FoodResult {...tomatoAndEggs}></FoodResult>
-            <FoodResult {...spaghettiMarinara}></FoodResult> */}
+            <FoodResult {...tomatoAndEggs}></FoodResult>
+            <FoodResult {...spaghettiMarinara}></FoodResult>
 
             <Pagination />
         </Flex>
