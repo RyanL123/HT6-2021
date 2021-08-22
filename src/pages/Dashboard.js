@@ -26,7 +26,7 @@ const Dashboard = () => {
     const ref = firebase.firestore().collection("users").doc(user.uid);
     const handleChange = (e) => {
         const name = e.target.name;
-        const amount = e.target.value == "" ? 0 : e.target.value;
+        const amount = e.target.value === "" ? 0 : e.target.value;
 
         // find the ingredient that changed
         const updatedIngredients = ingredients.map((ingredient) =>

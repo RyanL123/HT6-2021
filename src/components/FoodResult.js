@@ -21,7 +21,7 @@ function calculateMatch(recipeIngredients, ingredients) {
         let name = recipeIngredients[i].name;
         denom += parseFloat(recipeIngredients[i].amount);
         for (let j = 0; j < ingredients.length; j++) {
-            if (ingredients[j].name == name) {
+            if (ingredients[j].name === name) {
                 num += Math.min(
                     parseFloat(ingredients[j].amount),
                     parseFloat(recipeIngredients[i].amount)

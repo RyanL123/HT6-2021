@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { chakra, Flex } from "@chakra-ui/react";
+import React from "react";
+import { Flex } from "@chakra-ui/react";
 import Pagination from "../components/Pagination";
 import FoodResult from "../components/FoodResult";
 
