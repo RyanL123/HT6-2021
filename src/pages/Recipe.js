@@ -20,7 +20,7 @@ import {
 
 import {Link } from "react-router-dom";
 
-const Recipe = () =>{
+const Recipe = (props) =>{
     const [ servings, setServings ] = useState(1)
 
     return (
@@ -43,7 +43,7 @@ const Recipe = () =>{
                         Food Name
                     </Heading>
                     <Image 
-                        src="https://thewoksoflife.com/wp-content/uploads/2016/02/beef-noodle-soup-7-1.jpg" 
+                        src={props.image}
                         fallbackSrc="https://via.placeholder.com/150"
                         boxSize="50vh"
                         borderRadius="5%"
@@ -112,10 +112,10 @@ const Recipe = () =>{
                             Instructions for step 4
                         </Text>
                     </Stack>
-                    <Button mt="2rem">
-                    <Link to="/dashboard">
-                        I made this recipe!
-                    </Link>
+                    <Button mt="2rem" onClick={console.log("clicked")}>
+                        <Link to="/dashboard">
+                            I made this recipe!
+                        </Link>
                     </Button>
                 </Box>
             </Flex>
