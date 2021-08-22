@@ -22,7 +22,10 @@ function calculateMatch(recipeIngredients, ingredients) {
         denom += parseFloat(recipeIngredients[i].amount);
         for (let j = 0; j < ingredients.length; j++) {
             if (ingredients[j].name == name) {
-                num += parseFloat(ingredients[j].amount);
+                num += Math.min(
+                    parseFloat(ingredients[j].amount),
+                    parseFloat(recipeIngredients[i].amount)
+                );
             }
         }
     }
