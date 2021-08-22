@@ -26,30 +26,14 @@ const Nav = () => {
         const provider = new firebase.auth.GoogleAuthProvider();
         firebase
             .auth()
-            .setPersistence(firebase.auth.Auth.Persistence.SESSION)
-            .then(() => {
-                firebase.auth().signInWithRedirect(provider);
-            });
-    }
-    useEffect(() => {
-        firebase
-            .auth()
-            .getRedirectResult()
+            .signInWithPopup(provider)
             .then((result) => {
                 // The signed-in user info.
                 var user = result.user;
-                // only overwrite if there is no current user signed in
-                // for some reason sometimes the value is the word "null"
-                if (
-                    localStorage.getItem("user") == null ||
-                    localStorage.getItem("user") == "null"
-                ) {
-                    localStorage.setItem("user", JSON.stringify(user));
-                    if (user) {
-                        // Redirect to dashboard
-                        window.location.href = "/dashboard";
-                    }
-                }
+                console.log(user);
+                localStorage.setItem("user", JSON.stringify(user));
+                // // Redirect to dashboard
+                window.location.href = "/dashboard";
             })
             .catch((error) => {
                 // Handle Errors here.
@@ -64,31 +48,7 @@ const Nav = () => {
                 console.log(error.message);
                 console.log(error.credential);
             });
-    });
-    // firebase
-    //     .auth()
-    //     .signInWithPopup(provider)
-    //     .then((result) => {
-    //         // The signed-in user info.
-    //         var user = result.user;
-    //         console.log(user);
-    //         localStorage.setItem("user", JSON.stringify(user));
-    //         // // Redirect to dashboard
-    //         // window.location.href = "/dashboard";
-    //     })
-    //     .catch((error) => {
-    //         // Handle Errors here.
-    //         var errorCode = error.code;
-    //         var errorMessage = error.message;
-    //         // The email of the user's account used.
-    //         var email = error.email;
-    //         // The firebase.auth.AuthCredential type that was used.
-    //         var credential = error.credential;
-    //         // ...
-    //         console.log(error.code);
-    //         console.log(error.message);
-    //         console.log(error.credential);
-    //     });
+    }
     return (
         <React.Fragment>
             <chakra.header
