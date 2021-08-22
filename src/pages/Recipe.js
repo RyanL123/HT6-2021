@@ -22,6 +22,7 @@ import firebase from "../firebase";
 
 const Recipe = () => {
     const [servings, setServings] = useState(1);
+    const [recipeIngredients, setRecipeIngredients] = useState([]);
     const [data, setData] = useState({});
     const { id } = useParams();
     const ref = firebase.firestore().collection("recipes").doc(id);
@@ -33,6 +34,12 @@ const Recipe = () => {
             } else {
             }
         });
+        ref.collection("recipes")
+            .doc(id)
+            .get()
+            .then(function (doc) {
+                console.log(doc.data());
+            });
     }, []);
     return (
         <Center w="100%">
