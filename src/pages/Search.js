@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import {
-    chakra,
-    Flex, 
-} from "@chakra-ui/react";
+import { chakra, Flex } from "@chakra-ui/react";
 import Pagination from "../components/Pagination";
 import FoodResult from "../components/FoodResult";
 
+<<<<<<< HEAD
 const tomatoAndEggs = {
     "title": "Tomato and Eggs",
     "image": "https://christieathome.com/wp-content/uploads/2020/10/Chinese-Tomato-Egg-Stirfry-18-1-scaled.jpg", 
@@ -26,6 +24,16 @@ const spaghettiMarinara = {
     "link": "/recipe", 
     "description": "Poached eggs on spaghetti with homemade tomato sauce issss basically the best thing ever. And I’ve been eating it all week. Just try to stop that dinner train, I dare you. Either move outta the way or jump on this one because here it comes."
 }
+=======
+const food = {
+    title: "Spicy beef ramen",
+    image:
+        "https://thewoksoflife.com/wp-content/uploads/2016/02/beef-noodle-soup-7-1.jpg",
+    link: "/recipe",
+    description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+};
+>>>>>>> 89df802231000401d81d93f8069dff6525a44b43
 
 const Search = () => {
     return (
@@ -36,8 +44,7 @@ const Search = () => {
 
             <Pagination />
         </Flex>
-    )
-}
+    );
+};
 
-  
-  export default Search
+export default Search;
