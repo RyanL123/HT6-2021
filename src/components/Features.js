@@ -163,7 +163,7 @@ function Features() {
                             </svg>
                         }
                     >
-                        Menu to create your food!
+                        Menu with instructions to create your food!
                     </Feature>
                 </SimpleGrid>
             </Box>
