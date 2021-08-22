@@ -36,7 +36,7 @@ const Recipe = () => {
                         Food Name
                     </Heading>
                     <Image 
-                        src={props.image}
+                        src="https://christieathome.com/wp-content/uploads/2020/10/Chinese-Tomato-Egg-Stirfry-18-1-scaled.jpg"
                         fallbackSrc="https://via.placeholder.com/150"
                         boxSize="50vh"
                         borderRadius="5%"
